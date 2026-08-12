@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "./GoogleLogin";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
-import axios from "axios";
+import { useState } from "react";
+import { imageUpload } from "./utility/imageUpload";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useAuth();
@@ -22,39 +22,27 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegister = (data) => {
-    console.log('data from register page', data);
+  const handleRegister = async (data) => {
     const profileImg = data.image[0];
-    registerUser(data.email, data.password)
-      .then((result) => {
-        console.log("register page", result.user);
-        // store the image in the form data
-        const formData = new FormData();
-        formData.append('image',profileImg);
-        // send the photo to store and get the url
-        const image_API_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_image_host_key}`
-        axios.post(image_API_URL, formData)
-        .then((res) => {
-          console.log('after image upload', res.data.data.url)
-          // update user profile to firebase
-          const userProfile = {
-            displayName : data.name,
-            photoURL : res.data.data.url
-          }
-          updateUserProfile(userProfile)
-          .then(() => {
-            console.log('user profile updated done');
-            navigate(location.state || '/')
-        })
-        .catch(error => {
-          console.log(error);
-          setError(error.message);
-        })
-      })
-    })
-      .catch((error) => {
-        setError(error.message);
-      });
+
+    try {
+      const result = await registerUser(data.email, data.password);
+      console.log("register page", result.user);
+
+      const imageURL = await imageUpload(profileImg);
+
+      // update user profile to firebase
+      const userProfile = {
+        displayName: data.name,
+        photoURL: imageURL,
+      };
+
+      await updateUserProfile(userProfile);
+
+      navigate(location.state || "/");
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -132,13 +120,13 @@ const Register = () => {
                     special character
                   </p>
                 )}
-                <a className="link link-hover">Forgot password?</a>
                 <a className="text-red-600">{error}</a>
               </div>
               <button className="btn btn-neutral mt-4">Register</button>
+              <a className="link link-hover">Forgot password?</a>
               <p>
                 Already Have an Account? Please{" "}
-                <Link state={location.state || '/'} to="/login">
+                <Link state={location.state || "/"} to="/login">
                   <span className="text-blue-700">Login</span>
                 </Link>
               </p>

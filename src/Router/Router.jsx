@@ -6,6 +6,9 @@ import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import PrivateRoute from "./PrivateRoute";
 import AllScholarship from "../Pages/AllScholarship/AllScholarship";
+import DashboardLayout from "../Layout/DashboardLayout";
+import AddScholarship from "../Pages/Admin/AddScholarship";
+
 
 export const router = createBrowserRouter([
     {
@@ -16,10 +19,6 @@ export const router = createBrowserRouter([
                index:true,
                 Component:Home
             },
-            {
-                path: '/allScholarShip',
-                element: <PrivateRoute><AllScholarship></AllScholarship></PrivateRoute>
-            }
         ]
     },
     {
@@ -33,6 +32,20 @@ export const router = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            }
+        ]
+    },
+    {
+        path:'dashboard',
+        element:<DashboardLayout></DashboardLayout>,
+        children:[
+            {
+                path:'addScholarship',
+                element:<AddScholarship></AddScholarship>
+            },
+            {
+                path: 'allScholarShip',
+                element:<AllScholarship></AllScholarship>
             }
         ]
     }
