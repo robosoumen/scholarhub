@@ -1,0 +1,9 @@
+.menu li > .active {
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 8px;
+}
+
+.menu li > .active svg {
+  stroke: white;
+}

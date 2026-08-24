@@ -74,7 +74,7 @@ const Navbar = () => {
                   <button onClick={handleLogOut}>Log Out</button>
                 </li>
                 <li>
-                 <Link to='/dashboard'>
+                 <Link to='/dashboard/allScholarShip'>
                   <button className="btn btn-primary">Dashboard</button>
                  </Link>
                 </li>

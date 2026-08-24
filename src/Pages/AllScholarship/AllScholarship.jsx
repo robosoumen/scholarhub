@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const AllScholarship = () => {
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate()
 
   const { data: scholarships = [] } = useQuery({
     queryKey: ["scholarship"],
@@ -11,6 +13,12 @@ const AllScholarship = () => {
       return res.data;
     },
   });
+
+  console.log('from scholarshup', scholarships)
+
+  const handleSeeDetails = (id) => {
+    navigate(`/scholarship/${id}`)
+  }
   return (
     <div>
       <p>All Scholarship : {scholarships.length}</p>
@@ -30,7 +38,7 @@ const AllScholarship = () => {
                Category Of Scholarship : {scholarship.subjectCategory}
               </p>
               <div className="card-actions">
-                <button className="btn btn-primary">Apply Now</button>
+                <button onClick={() => handleSeeDetails(scholarship._id)} className="btn btn-primary">See Details</button>
               </div>
             </div>
           </div>
