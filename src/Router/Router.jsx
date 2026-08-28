@@ -11,6 +11,8 @@ import ScholarshipDetails from "../Pages/AllScholarship/ScholarshipDetails";
 import Payment from "../Pages/Payment/Payment";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 import PaymentCancel from "../Pages/Payment/PaymentCancel";
+import { PaymentHistory } from "../Pages/PaymentHistory/PaymentHistory";
+import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
                 path: 'allScholarShip',
                 element:<AllScholarship></AllScholarship>
             },
+            {
+                path: 'paymentHistory',
+                element:<PaymentHistory></PaymentHistory>
+            },
+            {
+                path:'manageUser',
+                element:<ManageUsers></ManageUsers>
+            }
             
         ]
     }

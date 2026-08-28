@@ -9,13 +9,11 @@ const PaymentSuccess = () => {
     const axiosSecure = useAxiosSecure();
 
     const sessionId = searchParams.get('session_id');
-    console.log(sessionId)
 
     useEffect(() => {
         if(sessionId){
             axiosSecure.patch(`payment-success?session_id=${sessionId}`)
             .then(res => {
-                console.log('session id is --',res.data)
                 setPaymentInfo({
                     transactionId : res.data.transactionId,
                     trackingId : res.data.trackingId,
@@ -33,8 +31,6 @@ const PaymentSuccess = () => {
         }
     })
 
-    console.log('from succes page , scholarship', scholarship)
-
     return (
         <div>
             <p>payment success</p>
@@ -42,9 +38,9 @@ const PaymentSuccess = () => {
             <p>Your tracking Id : {paymentInfo.trackingId}</p>
 
             <p>
-                {scholarship.userName} your application for {scholarship.universityName} successful
+                {scholarship?.userName} your application for {scholarship?.universityName} successful
             </p>
-            <p>applicationStatus : {scholarship.applicationStatus}</p>
+            <p>applicationStatus : {scholarship?.applicationStatus}</p>
         </div>
     );
 };

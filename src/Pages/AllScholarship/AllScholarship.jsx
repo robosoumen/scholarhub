@@ -7,14 +7,12 @@ const AllScholarship = () => {
   const navigate = useNavigate()
 
   const { data: scholarships = [] } = useQuery({
-    queryKey: ["scholarship"],
+    queryKey: ["scholarshipIs"],
     queryFn: async () => {
       const res = await axiosSecure.get("/scholarship");
       return res.data;
     },
   });
-
-  console.log('from scholarshup', scholarships)
 
   const handleSeeDetails = (id) => {
     navigate(`/scholarship/${id}`)

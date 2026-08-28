@@ -5,6 +5,7 @@ import GoogleLogin from "./GoogleLogin";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { imageUpload } from "./utility/imageUpload";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useAuth();
@@ -12,6 +13,8 @@ const Register = () => {
   const location = useLocation();
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const axiosSecure = useAxiosSecure();
+
   const handleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
@@ -30,6 +33,20 @@ const Register = () => {
       console.log("register page", result.user);
 
       const imageURL = await imageUpload(profileImg);
+
+      // create user in the database
+      const userInfo = {
+        email : data.email,
+        displayName : data.name,
+        photoURL : imageURL
+      }
+      axiosSecure.post('/users', userInfo)
+      .then(res => {
+        if(res.data.insertedId){
+          console.log('user created at the database')
+        }
+      })
+
 
       // update user profile to firebase
       const userProfile = {

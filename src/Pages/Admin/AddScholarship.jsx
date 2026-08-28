@@ -15,7 +15,6 @@ const AddScholarship = () => {
   } = useForm();
 
   const handleAddScholarship = async (data) => {
-    console.log("froma addddd from", data);
 
     const scholarshipImage = data.image[0];
 

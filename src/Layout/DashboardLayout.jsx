@@ -1,6 +1,8 @@
 import { FaCertificate, FaGraduationCap } from "react-icons/fa6";
-import { Link, NavLink, Outlet } from "react-router";
+import {  NavLink, Outlet } from "react-router";
 import './DashboardLayout.css'
+import { MdReceiptLong } from "react-icons/md";
+import { HiUserGroup } from "react-icons/hi";
 
 const DashboardLayout = () => {
   return (
@@ -98,6 +100,32 @@ const DashboardLayout = () => {
                   <FaCertificate></FaCertificate>
                   <span className="is-drawer-close:hidden">
                     All Scholarship
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manageUser"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage-Users"
+                >
+                  {/* icon */}
+                  <HiUserGroup />
+                  <span className="is-drawer-close:hidden">
+                    Manage Users
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/paymentHistory"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Payment-History"
+                >
+                  {/* icon */}
+                  <MdReceiptLong></MdReceiptLong>
+                  <span className="is-drawer-close:hidden">
+                    Payment History
                   </span>
                 </NavLink>
               </li>

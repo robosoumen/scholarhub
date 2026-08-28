@@ -7,7 +7,7 @@ const Payment = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  console.log("from payment page", id);
+ 
 
   const { data: scholarship = [] } = useQuery({
     queryKey: ["payment", id],
@@ -16,8 +16,6 @@ const Payment = () => {
       return res.data;
     },
   });
-
-  console.log("in payment page", scholarship);
 
   const handlePayment = async () => {
     const paymentInfo = {
@@ -41,7 +39,6 @@ const Payment = () => {
         "/create-checkout-session",
         paymentInfo,
       );
-      console.log(res.data);
       window.location.href = res.data.url;
     } catch (error) {
       console.error("Payment error:", error.response?.data);
