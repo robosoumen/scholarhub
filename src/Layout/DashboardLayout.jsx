@@ -1,10 +1,13 @@
 import { FaCertificate, FaGraduationCap } from "react-icons/fa6";
-import {  NavLink, Outlet } from "react-router";
-import './DashboardLayout.css'
+import { NavLink, Outlet } from "react-router";
+import "./DashboardLayout.css";
 import { MdReceiptLong } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -76,20 +79,7 @@ const DashboardLayout = () => {
                   <span className="is-drawer-close:hidden">Homepage</span>
                 </NavLink>
               </li>
-              {/* add scholarship */}
-              <li>
-                <NavLink
-                  to="/dashboard/addScholarship"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Add-Scholarship"
-                >
-                  {/* icon */}
-                  <FaGraduationCap></FaGraduationCap>
-                  <span className="is-drawer-close:hidden">
-                    Add Scholarship
-                  </span>
-                </NavLink>
-              </li>
+              {/* all scholarship */}
               <li>
                 <NavLink
                   to="/dashboard/allScholarship"
@@ -103,19 +93,7 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/dashboard/manageUser"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage-Users"
-                >
-                  {/* icon */}
-                  <HiUserGroup />
-                  <span className="is-drawer-close:hidden">
-                    Manage Users
-                  </span>
-                </NavLink>
-              </li>
+              {/* payment-history */}
               <li>
                 <NavLink
                   to="/dashboard/paymentHistory"
@@ -129,7 +107,37 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-
+              {/* add scholarship */}
+              {role.role === "admin" && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/addScholarship"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Add-Scholarship"
+                    >
+                      {/* icon */}
+                      <FaGraduationCap></FaGraduationCap>
+                      <span className="is-drawer-close:hidden">
+                        Add Scholarship
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/manageUser"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Manage-Users"
+                    >
+                      {/* icon */}
+                      <HiUserGroup />
+                      <span className="is-drawer-close:hidden">
+                        Manage Users
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
               {/* List item */}
               <li>
                 <button

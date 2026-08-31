@@ -3,12 +3,15 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { RiUserFollowFill, RiUserUnfollowFill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const { loading } = useAuth();
 
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
+    enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
@@ -17,17 +20,26 @@ const ManageUsers = () => {
 
   const handleUser = (id, role) => {
     const updateInfo = { role: role };
-    axiosSecure.patch(`/users/${id}`, updateInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You are Making ${role}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes make ${role}`,
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.patch(`/users/${id}/role`, updateInfo).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            Swal.fire({
+              title: "Confirmed!",
+              text: `you make ${role}`,
+              icon: "success",
+            });
+          }
         });
-      }
     });
   };
 
@@ -54,17 +66,16 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed)
-        axiosSecure.delete(`/users/${id}`)
-      .then((res) => {
-        if(res.data.deletedCount){
-          refetch();
-          Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
+        axiosSecure.delete(`/users/${id}/role`).then((res) => {
+          if (res.data.deletedCount) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "You delete the user.",
+              icon: "success",
+            });
+          }
         });
-        }
-      })
     });
   };
 
@@ -104,32 +115,38 @@ const ManageUsers = () => {
                   <td>{user.role}</td>
                   <td>{user.createdAt}</td>
                   <td>
-                    <button
-                      onClick={() => handleModerate(user._id)}
-                      className="btn btn-sm"
-                    >
-                      <RiUserFollowFill />
-                    </button>
-                    <button
-                      onClick={() => handleReject(user._id)}
-                      className="btn btn-sm mx-1"
-                    >
-                      <RiUserUnfollowFill />
-                    </button>
+                    {user.role === "moderator" ? (
+                      <button
+                        onClick={() => handleReject(user._id)}
+                        className="btn btn-sm mx-1 bg-red-600"
+                      >
+                        <RiUserUnfollowFill />
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleModerate(user._id)}
+                        className="btn btn-sm bg-green-500"
+                      >
+                        <RiUserFollowFill />
+                      </button>
+                    )}
                   </td>
                   <td>
-                    <button
-                      onClick={() => handleAdmin(user._id)}
-                      className="btn btn-sm"
-                    >
-                      <RiUserFollowFill />
-                    </button>
-                    <button
-                      onClick={() => handleReject(user._id)}
-                      className="btn btn-sm mx-1"
-                    >
-                      <RiUserUnfollowFill />
-                    </button>
+                    {user.role === "admin" ? (
+                      <button
+                        onClick={() => handleReject(user._id)}
+                        className="btn btn-sm mx-1 bg-red-600"
+                      >
+                        <RiUserUnfollowFill />
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleAdmin(user._id)}
+                        className="btn btn-sm bg-green-500"
+                      >
+                        <RiUserFollowFill />
+                      </button>
+                    )}
                   </td>
                   <td>
                     <button

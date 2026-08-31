@@ -13,6 +13,8 @@ import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 import PaymentCancel from "../Pages/Payment/PaymentCancel";
 import { PaymentHistory } from "../Pages/PaymentHistory/PaymentHistory";
 import ManageUsers from "../Pages/ManageUsers/ManageUsers";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
 export const router = createBrowserRouter([
@@ -58,12 +60,8 @@ export const router = createBrowserRouter([
     },
     {
         path:'dashboard',
-        element:<DashboardLayout></DashboardLayout>,
+        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
-            {
-                path:'addScholarship',
-                element:<AddScholarship></AddScholarship>
-            },
             {
                 path: 'allScholarShip',
                 element:<AllScholarship></AllScholarship>
@@ -73,8 +71,12 @@ export const router = createBrowserRouter([
                 element:<PaymentHistory></PaymentHistory>
             },
             {
+                path:'addScholarship',
+                element:<AdminRoute><AddScholarship></AddScholarship></AdminRoute>
+            },
+            {
                 path:'manageUser',
-                element:<ManageUsers></ManageUsers>
+                element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             }
             
         ]
