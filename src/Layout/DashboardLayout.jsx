@@ -1,8 +1,9 @@
-import { FaCertificate, FaGraduationCap } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router";
 import "./DashboardLayout.css";
-import { MdReceiptLong } from "react-icons/md";
-import { HiUserGroup } from "react-icons/hi";
+import { MdReceiptLong, MdSchool } from "react-icons/md";
+import { HiAcademicCap, HiUserGroup } from "react-icons/hi";
+import { TfiWrite } from "react-icons/tfi";
+import { LuFileCheck2 } from "react-icons/lu";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -87,7 +88,7 @@ const DashboardLayout = () => {
                   data-tip="All-Scholarship"
                 >
                   {/* icon */}
-                  <FaCertificate></FaCertificate>
+                  <HiAcademicCap />
                   <span className="is-drawer-close:hidden">
                     All Scholarship
                   </span>
@@ -107,9 +108,38 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-              {/* add scholarship */}
+              {/* Manage Applied Application - moderator private route */}
+              <li>
+                <NavLink
+                  to="/dashboard/manageApplication"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Application"
+                >
+                  {/* icon */}
+                  <LuFileCheck2 />
+                  <span className="is-drawer-close:hidden">
+                    Manage Application
+                  </span>
+                </NavLink>
+              </li>
+              {/* Manage Scholarship - admin private route */}
+              <li>
+                <NavLink
+                  to="/dashboard/manageScholarship"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Scholarship"
+                >
+                  {/* icon */}
+                  <MdSchool />
+                  <span className="is-drawer-close:hidden">
+                    Manage Scholarship
+                  </span>
+                </NavLink>
+              </li>
+              {/*admin private route */}
               {role.role === "admin" && (
                 <>
+                {/* add scholarship */}
                   <li>
                     <NavLink
                       to="/dashboard/addScholarship"
@@ -117,12 +147,13 @@ const DashboardLayout = () => {
                       data-tip="Add-Scholarship"
                     >
                       {/* icon */}
-                      <FaGraduationCap></FaGraduationCap>
+                      <TfiWrite />
                       <span className="is-drawer-close:hidden">
                         Add Scholarship
                       </span>
                     </NavLink>
                   </li>
+                  {/* manage user */}
                   <li>
                     <NavLink
                       to="/dashboard/manageUser"

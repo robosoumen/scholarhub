@@ -15,6 +15,8 @@ import { PaymentHistory } from "../Pages/PaymentHistory/PaymentHistory";
 import ManageUsers from "../Pages/ManageUsers/ManageUsers";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import ManageApplication from "../Pages/ManageApplication/ManageApplication";
+import ManageScholarship from "../Pages/ManageScholarship/ManageScholarship";
 
 
 export const router = createBrowserRouter([
@@ -77,7 +79,15 @@ export const router = createBrowserRouter([
             {
                 path:'manageUser',
                 element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
-            }
+            },
+            {
+                path:'manageApplication',
+                element:<ManageApplication></ManageApplication>
+            },
+            {
+                path:'manageScholarship',
+                element:<ManageScholarship></ManageScholarship>
+            },
             
         ]
     }

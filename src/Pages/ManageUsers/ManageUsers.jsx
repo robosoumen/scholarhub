@@ -52,7 +52,7 @@ const ManageUsers = () => {
   };
 
   const handleReject = (id) => {
-    handleUser(id, "user");
+    handleUser(id, "student");
   };
 
   const handleDelete = (id) => {

@@ -178,7 +178,7 @@ const AddScholarship = () => {
                   <label className="label">Deadline</label>
                   <input
                     {...register("deadline", {required:true})}
-                    type="text"
+                    type="date"
                     className="input w-full"
                     placeholder="Deadline"
                   />
