@@ -17,6 +17,10 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import ManageApplication from "../Pages/ManageApplication/ManageApplication";
 import ManageScholarship from "../Pages/ManageScholarship/ManageScholarship";
+import MyProfile from "../Pages/MyProfile/MyProfile";
+import MyApplication from "../Pages/MyApplication/MyApplication";
+import MyReview from "../Pages/MyReview/MyReview";
+import AllReviews from "../Pages/AllReviews/AllReviews";
 
 
 export const router = createBrowserRouter([
@@ -87,6 +91,22 @@ export const router = createBrowserRouter([
             {
                 path:'manageScholarship',
                 element:<ManageScholarship></ManageScholarship>
+            },
+            {
+                path:'myProfile',
+                element:<MyProfile></MyProfile>
+            },
+            {
+                path:'myApplication',
+                element:<MyApplication></MyApplication>
+            },
+            {
+                path:'myReview',
+                element:<MyReview></MyReview>
+            },
+            {
+                path:'allReview',
+                element:<AllReviews></AllReviews>
             },
             
         ]

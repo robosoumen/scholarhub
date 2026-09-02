@@ -13,7 +13,7 @@ const ManageScholarship = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const { data: scholarships = [], refetch } = useQuery({
@@ -69,6 +69,19 @@ const ManageScholarship = () => {
       });
   };
 
+  const handleDeleteScholarship = (scholarship) => {
+    axiosSecure.delete(`/scholarship-delete/${scholarship._id}`).then((res) => {
+      if (res.data.deletedCount) {
+        refetch();
+        Swal.fire({
+          title: "Deleted ",
+          text: "Delete done",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <p>Manage Scholarship:{scholarships.length}</p>
@@ -97,9 +110,15 @@ const ManageScholarship = () => {
                   <td>
                     <button
                       onClick={() => openScholarshipModal(scholarship)}
-                      className="btn"
+                      className="btn btn-sm"
                     >
                       Update
+                    </button>
+                    <button
+                      onClick={() => handleDeleteScholarship(scholarship)}
+                      className="btn btn-sm"
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -112,7 +131,7 @@ const ManageScholarship = () => {
       {/* modal */}
       <dialog ref={scholarshipModalRef} className="modal">
         <div className="modal-box">
-             {/* eslint-disable-next-line react-hooks/refs */}
+          {/* eslint-disable-next-line react-hooks/refs */}
           <form onSubmit={handleSubmit(handleUpdateScholarship)}>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
               <div className="card-body">

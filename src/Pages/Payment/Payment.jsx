@@ -17,10 +17,12 @@ const Payment = () => {
     },
   });
 
+  console.log('jjjjjjjjjjjjjjjjjj', scholarship)
+
   const handlePayment = async () => {
     const paymentInfo = {
       scholarshipId: scholarship._id,
-      // userId : 
+      userId : user?._id,
       userName : user?.displayName,
       userEmail: user?.email,
       universityName : scholarship.universityName,
@@ -28,10 +30,6 @@ const Payment = () => {
       degree :scholarship.degree,
       applicationFees: scholarship.applicationFees,
       serviceCharge :scholarship.serviceCharge ,
-      // applicationStatus : ,
-      // paymentStatus : ,
-      // applicationDate : ,
-      // feedback : ,
       scholarshipName: scholarship.scholarshipName,
     };
     try {

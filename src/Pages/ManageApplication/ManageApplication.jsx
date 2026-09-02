@@ -158,7 +158,7 @@ const ManageApplication = () => {
                         <li>
                           <button
                             onClick={() =>
-                              handleStatusChange(application._id, "completed")
+                              handleStatusChange(application._id, "Completed")
                             }
                             className="btn"
                           >
@@ -170,7 +170,7 @@ const ManageApplication = () => {
                     <button
                       className="btn btn-error btn-sm mx-1 my-1"
                       onClick={() =>
-                        handleStatusChange(application._id, "Cancelled")
+                        handleStatusChange(application._id, "Rejected")
                       }
                     >
                       Cancel
