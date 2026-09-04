@@ -1,10 +1,10 @@
 import { NavLink, Outlet } from "react-router";
 import "./DashboardLayout.css";
 import { MdReceiptLong, MdSchool } from "react-icons/md";
-import { HiAcademicCap, HiUserGroup } from "react-icons/hi";
+import { HiUserGroup } from "react-icons/hi";
 import { TfiWrite } from "react-icons/tfi";
 import { LuFileCheck2 } from "react-icons/lu";
-import { FaBook, FaStar, FaUserGraduate } from "react-icons/fa6";
+import { FaBook, FaMagnifyingGlass, FaStar, FaUserGraduate } from "react-icons/fa6";
 import { RiChatSmile2Line } from "react-icons/ri";
 import useRole from "../Hooks/useRole";
 
@@ -80,20 +80,6 @@ const DashboardLayout = () => {
                     <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   </svg>
                   <span className="is-drawer-close:hidden">Homepage</span>
-                </NavLink>
-              </li>
-              {/* all scholarship */}
-              <li>
-                <NavLink
-                  to="/dashboard/allScholarship"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="All-Scholarship"
-                >
-                  {/* icon */}
-                  <HiAcademicCap />
-                  <span className="is-drawer-close:hidden">
-                    All Scholarship
-                  </span>
                 </NavLink>
               </li>
               {/* payment-history */}
@@ -227,6 +213,20 @@ const DashboardLayout = () => {
                       <MdSchool />
                       <span className="is-drawer-close:hidden">
                         Manage Scholarship
+                      </span>
+                    </NavLink>
+                  </li>
+                  {/* analytics */}
+                  <li>
+                    <NavLink
+                      to="/dashboard/analytics"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Analysis"
+                    >
+                      {/* icon */}
+                      <FaMagnifyingGlass />
+                      <span className="is-drawer-close:hidden">
+                        Analysis
                       </span>
                     </NavLink>
                   </li>

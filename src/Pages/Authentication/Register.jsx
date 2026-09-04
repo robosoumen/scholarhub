@@ -19,6 +19,7 @@ const Register = () => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+
   const {
     register,
     handleSubmit,
@@ -36,17 +37,16 @@ const Register = () => {
 
       // create user in the database
       const userInfo = {
-        email : data.email,
-        displayName : data.name,
-        photoURL : imageURL
-      }
-      axiosSecure.post('/users', userInfo)
-      .then(res => {
-        if(res.data.insertedId){
-          console.log('user created at the database')
-        }
-      })
+        email: data.email,
+        displayName: data.name,
+        photoURL: imageURL,
+      };
 
+      axiosSecure.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          console.log("user created at the database");
+        }
+      });
 
       // update user profile to firebase
       const userProfile = {
@@ -63,94 +63,187 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <div className="card-body">
-          <form onSubmit={handleSubmit(handleRegister)}>
-            <fieldset className="fieldset">
-              {/* Name */}
-              <label className="label">Name</label>
-              <input
-                type="text"
-                {...register("name", { required: true })}
-                className="input"
-                placeholder="Your Name"
-              />
-              {errors.name?.type === "required" && (
-                <p className="text-red-600">name must required</p>
-              )}
-              {/* image */}
-              <label className="label">Image</label>
-              <input
-                type="file"
-                {...register("image", { required: true })}
-                className="file-input"
-                placeholder="Your Image"
-              />
-              {errors.image?.type === "required" && (
-                <p className="text-red-600">image must required</p>
-              )}
-              {/* email */}
-              <label className="label">Email</label>
-              <input
-                type="email"
-                {...register("email", { required: true })}
-                className="input"
-                placeholder="Email"
-              />
-              {errors.email?.type === "required" && (
-                <p className="text-red-600">email must required</p>
-              )}
-              {/* password */}
-              <div className="relative">
-                <label className="label">Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    pattern:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).*$/,
-                  })}
-                  className="input"
-                  placeholder="Password"
-                />
+    <div className="min-h-[calc(100vh-72px)] bg-base-200 px-4 py-10 sm:py-14">
+      <div className="mx-auto w-full max-w-lg">
+        {/* Register Card */}
+        <div className="overflow-hidden rounded-3xl bg-base-100 shadow-xl">
+          {/* Header */}
+          <div className="bg-primary px-6 py-8 text-center text-primary-content sm:px-10">
+            <h1 className="text-3xl font-bold tracking-tight">
+              Create Your Account
+            </h1>
+
+            <p className="mt-2 text-sm opacity-90">
+              Join ScholarHub and discover scholarship opportunities
+            </p>
+          </div>
+
+          <div className="px-6 py-8 sm:px-10">
+            <form onSubmit={handleSubmit(handleRegister)}>
+              <fieldset className="space-y-5">
+                {/* Name */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    {...register("name", { required: true })}
+                    className={`input h-12 w-full rounded-xl border-base-300 bg-base-100 px-4 focus:border-primary focus:outline-none ${
+                      errors.name ? "border-error" : ""
+                    }`}
+                    placeholder="Enter your full name"
+                  />
+
+                  {errors.name?.type === "required" && (
+                    <p className="mt-1.5 text-sm text-error">
+                      Name is required
+                    </p>
+                  )}
+                </div>
+
+                {/* Image */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Profile Image
+                  </label>
+
+                  <input
+                    type="file"
+                    {...register("image", { required: true })}
+                    className={`file-input h-12 w-full rounded-xl border-base-300 bg-base-100 file:mr-4 file:h-full file:border-0 file:bg-primary file:px-4 file:font-medium file:text-primary-content ${
+                      errors.image ? "border-error" : ""
+                    }`}
+                  />
+
+                  {errors.image?.type === "required" && (
+                    <p className="mt-1.5 text-sm text-error">
+                      Profile image is required
+                    </p>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Email Address
+                  </label>
+
+                  <input
+                    type="email"
+                    {...register("email", { required: true })}
+                    className={`input h-12 w-full rounded-xl border-base-300 bg-base-100 px-4 focus:border-primary focus:outline-none ${
+                      errors.email ? "border-error" : ""
+                    }`}
+                    placeholder="Enter your email"
+                  />
+
+                  {errors.email?.type === "required" && (
+                    <p className="mt-1.5 text-sm text-error">
+                      Email is required
+                    </p>
+                  )}
+                </div>
+
+                {/* Password */}
+                <div>
+                  <label className="mb-2 block text-sm font-semibold">
+                    Password
+                  </label>
+
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                        pattern:
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).*$/,
+                      })}
+                      className={`input h-12 w-full rounded-xl border-base-300 bg-base-100 px-4 pr-12 focus:border-primary focus:outline-none ${
+                        errors.password ? "border-error" : ""
+                      }`}
+                      placeholder="Create a strong password"
+                    />
+
+                    <button
+                      type="button"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-base-content/60 transition-colors hover:text-primary"
+                      onClick={handleShowPassword}
+                    >
+                      {showPassword ? <FaEye /> : <FaRegEyeSlash />}
+                    </button>
+                  </div>
+
+                  {/* Password Validation */}
+                  <div className="mt-2 space-y-1">
+                    {errors.password?.type === "required" && (
+                      <p className="text-sm text-error">Password is required</p>
+                    )}
+
+                    {errors.password?.type === "minLength" && (
+                      <p className="text-sm text-error">
+                        Password must be at least 6 characters long
+                      </p>
+                    )}
+
+                    {errors.password?.type === "pattern" && (
+                      <p className="text-sm text-error">
+                        Password must contain uppercase, lowercase, number and
+                        special character
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Server Error */}
+                {error && (
+                  <div className="rounded-xl border border-error/20 bg-error/10 px-4 py-3">
+                    <p className="text-sm text-error">{error}</p>
+                  </div>
+                )}
+
+                {/* Register Button */}
                 <button
-                  className="absolute right-6 bottom-3"
-                  onClick={handleShowPassword}
+                  type="submit"
+                  className="btn btn-primary h-12 w-full rounded-xl text-base font-semibold shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                 >
-                  {showPassword ? <FaEye /> : <FaRegEyeSlash />}
+                  Create Account
                 </button>
-              </div>
-              <div>
-                {errors.password?.type === "required" && (
-                  <p className="text-red-600">password must required</p>
-                )}
-                {errors.password?.type === "minLength" && (
-                  <p className="text-red-600">
-                    password must at least 6 character or long
-                  </p>
-                )}
-                {errors.password?.type === "pattern" && (
-                  <p className="text-red-600">
-                    password must have one upercase onelower case one number one
-                    special character
-                  </p>
-                )}
-                <a className="text-red-600">{error}</a>
-              </div>
-              <button className="btn btn-neutral mt-4">Register</button>
-              <a className="link link-hover">Forgot password?</a>
-              <p>
-                Already Have an Account? Please{" "}
-                <Link state={location.state || "/"} to="/login">
-                  <span className="text-blue-700">Login</span>
-                </Link>
-              </p>
-            </fieldset>
-          </form>
-          <GoogleLogin></GoogleLogin>
+
+                {/* Login */}
+                <p className="text-center text-sm text-base-content/70">
+                  Already have an account?{" "}
+                  <Link
+                    state={location.state || "/"}
+                    to="/login"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    Login
+                  </Link>
+                </p>
+              </fieldset>
+            </form>
+
+            {/* Divider */}
+            <div className="my-6 flex items-center gap-3">
+              <div className="h-px flex-1 bg-base-300"></div>
+              <span className="text-xs font-medium uppercase text-base-content/50">
+                Or continue with
+              </span>
+              <div className="h-px flex-1 bg-base-300"></div>
+            </div>
+
+            {/* Google Login */}
+            <GoogleLogin />
+          </div>
         </div>
+
+        {/* Bottom Text */}
+        <p className="mt-6 text-center text-xs text-base-content/50">
+          By creating an account, you agree to use ScholarHub responsibly.
+        </p>
       </div>
     </div>
   );

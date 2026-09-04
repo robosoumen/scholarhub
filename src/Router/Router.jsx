@@ -21,6 +21,7 @@ import MyProfile from "../Pages/MyProfile/MyProfile";
 import MyApplication from "../Pages/MyApplication/MyApplication";
 import MyReview from "../Pages/MyReview/MyReview";
 import AllReviews from "../Pages/AllReviews/AllReviews";
+import Analytics from "../Pages/Analytics/Analytics";
 
 
 export const router = createBrowserRouter([
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                index:true,
                 Component:Home
+            },
+            {
+                path:'allScholarship',
+                Component:AllScholarship
             },
             {
                 path:'scholarship/:id',
@@ -47,7 +52,7 @@ export const router = createBrowserRouter([
             {
                 path:'payment-cancelled',
                 element:<PaymentCancel></PaymentCancel>
-            }
+            },
         ]
     },
     {
@@ -69,10 +74,6 @@ export const router = createBrowserRouter([
         element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children:[
             {
-                path: 'allScholarShip',
-                element:<AllScholarship></AllScholarship>
-            },
-            {
                 path: 'paymentHistory',
                 element:<PaymentHistory></PaymentHistory>
             },
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
             {
                 path:'manageUser',
                 element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+            },
+            {
+                path:'analytics',
+                element:<AdminRoute><Analytics></Analytics></AdminRoute>
             },
             {
                 path:'manageApplication',
@@ -110,5 +115,9 @@ export const router = createBrowserRouter([
             },
             
         ]
+    },
+    {
+        path:'*',
+        element:<p>Page not found 404</p>
     }
 ])

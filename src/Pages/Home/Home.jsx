@@ -1,10 +1,15 @@
-import React from 'react';
-import Profile from '../../Components/Profile/Profile';
+import Banner from './Banner';
+import FAQ from './FAQ ';
+import SuccessStories from './SuccessStories ';
+import TopScholarships from './TopScholarships ';
 
 const Home = () => {
     return (
         <div>
-            <Profile></Profile>
+            <Banner></Banner>
+            <TopScholarships></TopScholarships>
+            <SuccessStories></SuccessStories>
+            <FAQ></FAQ>
         </div>
     );
 };
