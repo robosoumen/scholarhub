@@ -13,7 +13,7 @@ const SuccessStories = () => {
       return res.data;
     },
   });
-  console.log("bbbbbbbb", testimonials);
+
   return (
     <section className="bg-base-100 px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">

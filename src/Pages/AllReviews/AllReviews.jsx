@@ -13,7 +13,6 @@ const AllReviews = () => {
     },
   });
 
-  console.log("bbbbbbbbbb", reviews);
 
   const handleReviewDelete = (review) => {
     axiosSecure.delete(`/reviews-delete/${review._id}`).then((res) => {

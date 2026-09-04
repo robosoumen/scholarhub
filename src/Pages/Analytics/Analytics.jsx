@@ -20,9 +20,7 @@ const Analytics = () => {
     },
   });
 
-  const array = [stats];
 
-  console.log(typeof array);
 
   const getPieChartData = (data) => {
     if (!data || Object.keys(data).length === 0) return [];

@@ -24,7 +24,6 @@ const ManageScholarship = () => {
     },
   });
 
-  console.log(scholarships);
 
   const openScholarshipModal = (scholarship) => {
     setSelectedScholarship(scholarship);
@@ -32,10 +31,9 @@ const ManageScholarship = () => {
     scholarshipModalRef.current.showModal();
   };
 
-  console.log("xxxxxxxxxxxxxxxxxx", selectedScholarship);
+  
 
   const handleUpdateScholarship = (data) => {
-    console.log("llllllllllllllllllllll", data);
 
     const updatedData = {
       applicationFees: data.applicationFees,

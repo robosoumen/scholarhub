@@ -19,7 +19,6 @@ const MyReview = () => {
     },
   });
 
-  console.log("vvvvvvvvvvv", reviews);
 
   const openEditModal = (review) => {
     setSelectedReview(review);

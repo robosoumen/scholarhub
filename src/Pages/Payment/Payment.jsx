@@ -17,7 +17,6 @@ const Payment = () => {
     },
   });
 
-  console.log('jjjjjjjjjjjjjjjjjj', scholarship)
 
   const handlePayment = async () => {
     const paymentInfo = {

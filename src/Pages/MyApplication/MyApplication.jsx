@@ -30,7 +30,6 @@ const MyApplication = () => {
 
   const openDetailsModalRef = (application) => {
     detailsModalRef.current.showModal();
-    console.log("yyyyyyyyyyyyyyyyyyyy", application);
     setDetailsModal(application);
   };
 
